@@ -5,6 +5,6 @@ const route = express()
 
 route.post('/register', registerController)
 
-route.get('/login', loginContoller)
+route.post('/login', loginContoller)
 
 module.exports = route
