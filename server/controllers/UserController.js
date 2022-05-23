@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const { generateToken } = require('../config/generateToken')
 const User = require('../models/UserModel')
 
 const registerController = async (req, res) => {
@@ -14,8 +15,9 @@ const registerController = async (req, res) => {
             email,
             password: hashedPassword
         })
+        const token = await generateToken(user._id)
         var { password, ...userDetails } = user._doc
-        return res.status(200).json({ message: 'register success', ...userDetails })
+        return res.status(200).json({ message: 'register success', ...userDetails, token })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: 'Internal Server Error', error })
@@ -35,8 +37,9 @@ const loginContoller = async (req, res) => {
         if (!comparePassword) {
             return res.status(404).json({ message: 'invalid email or password.' })
         }
+        const token = await generateToken(user._id)
         var { password, ...userDetails } = user._doc
-        return res.status(200).json({ message: 'login success', ...userDetails })
+        return res.status(200).json({ message: 'login success', ...userDetails, token })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: 'Internal Server Error', error })
