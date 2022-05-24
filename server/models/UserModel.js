@@ -12,8 +12,15 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    bookmarkedBlogs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Blog'
+    }],
 })
 
-const User = mongoose.model('User', userSchema)
-module.exports = User
+module.exports = mongoose.model('User', userSchema)
