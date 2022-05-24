@@ -14,8 +14,8 @@ const blogSchema = new mongoose.Schema({
         default: 'https://res.cloudinary.com/dzqbzqgqw/image/upload/v1589788981/blog/default.jpg'
     },
     categories: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
+        type: String,
+        default: 'misc'
     }],
     author: {
         type: mongoose.Schema.Types.ObjectId,

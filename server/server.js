@@ -1,5 +1,6 @@
 const express = require('express')
 const UserRoutes = require('./routes/UserRoutes')
+const BlogRoutes = require('./routes/BlogRoutes')
 const dotenv = require('dotenv')
 const dbConnection = require('./database/dbConnection')
 
@@ -14,6 +15,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/user', UserRoutes)
+app.use('/blog', BlogRoutes)
 
 dbConnection()
 
